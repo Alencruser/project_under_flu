@@ -5,9 +5,9 @@ import { BookService } from '../services/book.service';
 import { Book } from '../models/book.interface';
 
 @Component({
-    selector: 'app-book-form',
-    templateUrl: './book-form.component.html',
-    standalone: false
+  selector: 'app-book-form',
+  templateUrl: './book-form.component.html',
+  standalone: false,
 })
 export class BookFormComponent implements OnInit {
   bookForm!: FormGroup;
@@ -31,6 +31,7 @@ export class BookFormComponent implements OnInit {
       title: ['', Validators.required],
       author: ['', Validators.required],
       note: [''],
+      cover: [''],
       lastModified: [new Date()],
     });
   }

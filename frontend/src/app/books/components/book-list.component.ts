@@ -30,7 +30,7 @@ export class BookListComponent implements OnInit {
   }
 
   getBookCover(book: Book) {
-    return book.cover || 'assets/leather-texture.jpg';
+    return book.cover || 'assets/basic-book.jpg';
   }
 
   openBookForm(): void {

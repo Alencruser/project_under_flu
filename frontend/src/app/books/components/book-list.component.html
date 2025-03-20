@@ -1,30 +1,16 @@
-<div class="book-list">
-  <!-- <mat-card *ngFor="let book of books" class="book-card">
-       Book Cover Image with mat-card-image directive 
-      <img mat-card-image [src]="getBookCover(book)" alt="Book Cover" />
-    
-      <div class="book-info">
-        <mat-card-title>{{ book.title }}</mat-card-title>
-        <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
-        
-        <mat-card-content>
-          <p><strong>Published:</strong> {{ book.published_date | date }}</p>
-        </mat-card-content>
-        
-        <mat-card-actions>
-          <button mat-button>Read more</button>
-          <button mat-raised-button color="danger"><mat-icon>delete</mat-icon>Delete</button>
-        </mat-card-actions>
-      </div>
-    
-    
-  </mat-card> -->
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="book-list row">
+  <div *ngFor="let book of books" class="card col-12 col-md-4 col-lg-3" style="height: 400px;">
+    <!-- Image with fixed height -->
+    <img [src]="getBookCover(book)" class="card-img-top" alt="Image" style="height: 60%; object-fit: contain;">
+    <!-- remove thhe padding right for img -->
+    <!-- Card Body with a flexible layout and overflow management -->
+    <div class="card-body d-flex flex-column" style="height: 40%; overflow-y: auto;"> 
+      <h5 class="card-title">{{book.title}}</h5>
+      <p class="card-text">Published: {{ book.published_date | date }} by {{ book.author }}</p>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+      <button class="btn btn-primary">More infos</button>
+      <button class="btn btn-danger" (click)="deleteBook(book.id)">Delete</button>
     </div>
   </div>
 </div>

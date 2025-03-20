@@ -13,6 +13,10 @@
         <label for="note">Note</label>
         <textarea id="note" formControlName="note"></textarea>
       </div>
+      <div>
+        <label for="cover">Cover</label>
+        <input id="cover" formControlName="cover" required />
+      </div>
       <button type="submit" [disabled]="bookForm.invalid">
         {{ isEditMode ? 'Update Book' : 'Add Book' }}
       </button>

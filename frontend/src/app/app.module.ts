@@ -6,10 +6,18 @@ import { AppComponent } from './app.component';
 import { BooksModule } from './books/book.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarModule } from './navbar/navbar.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BooksModule, NoopAnimationsModule, NgbModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BooksModule,
+    NoopAnimationsModule,
+    NgbModule,
+    NavbarModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
