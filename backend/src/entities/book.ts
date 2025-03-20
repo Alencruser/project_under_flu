@@ -21,6 +21,9 @@ export class Book {
     @Column({ type: "text", nullable: true })
     note?: string;
 
+    @Column({ type: "text", nullable: true })
+    cover?: string;
+
     @CreateDateColumn()
     published_date!: Date;
 
