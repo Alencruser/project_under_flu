@@ -7,6 +7,7 @@ import { BookFormComponent } from './components/book-form.component';
 import { BookService } from './services/book.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [BookListComponent, BookFormComponent],
