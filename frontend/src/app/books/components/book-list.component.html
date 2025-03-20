@@ -1,36 +1,16 @@
 <div class="book-list">
-    <h2>Your Book List</h2>
-  
-    <!-- Add Book Button -->
-    <button (click)="openBookForm()">Add New Book</button>
-  
-    <!-- Book Table -->
-    <table *ngIf="books && books.length > 0">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Last Modified</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let book of books">
-          <td>{{ book.title }}</td>
-          <td>{{ book.author }}</td>
-          <td>{{ book.last_modification_date | date: 'short' }}</td>
-          <td>
-            <!-- Edit Button -->
-            <button (click)="editBook(book.id)">Edit</button>
-  
-            <!-- Delete Button -->
-            <button (click)="deleteBook(book.id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <!-- No Books Message -->
-    <p *ngIf="books?.length === 0">You don't have any books yet. Add one now!</p>
-  </div>
-  
+  <mat-card *ngFor="let book of books" class="book-card">
+    <mat-card-header>
+      <mat-card-title>{{ book.title }}</mat-card-title>
+      <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="book.cover" alt="{{ book.title }} cover">
+    <mat-card-content>
+      <p>Some brief description of the book could go here.</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary">More Info</button>
+      <button mat-button color="accent">Buy Now</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

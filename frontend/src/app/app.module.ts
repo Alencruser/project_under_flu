@@ -4,10 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BooksModule } from './books/book.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BooksModule],
+  imports: [BrowserModule, AppRoutingModule, BooksModule, NoopAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

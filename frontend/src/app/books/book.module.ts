@@ -6,6 +6,7 @@ import { BookListComponent } from './components/book-list.component';
 import { BookFormComponent } from './components/book-form.component';
 import { BookService } from './services/book.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [BookListComponent, BookFormComponent],
@@ -15,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     BooksRoutingModule,
     HttpClientModule,
+    MatButtonModule,
+    MatCardModule,
   ],
   providers: [BookService],
 })
