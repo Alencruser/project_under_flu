@@ -4,9 +4,10 @@ import { Book } from '../models/book.interface'; // Book interface for type safe
 import { Router } from '@angular/router'; // For navigation (e.g., to the edit form)
 
 @Component({
-  selector: 'app-book-list',
-  templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.scss'],
+    selector: 'app-book-list',
+    templateUrl: './book-list.component.html',
+    styleUrls: ['./book-list.component.scss'],
+    standalone: false
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];

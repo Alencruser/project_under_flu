@@ -5,8 +5,9 @@ import { BookService } from '../services/book.service';
 import { Book } from '../models/book.interface';
 
 @Component({
-  selector: 'app-book-form',
-  templateUrl: './book-form.component.html',
+    selector: 'app-book-form',
+    templateUrl: './book-form.component.html',
+    standalone: false
 })
 export class BookFormComponent implements OnInit {
   bookForm!: FormGroup;
