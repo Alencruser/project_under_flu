@@ -9,7 +9,7 @@
       <p class="card-text">Published: {{ book.published_date | date }} by {{ book.author }}</p>
     </div>
     <div class="card-footer d-flex justify-content-between">
-      <button class="btn btn-primary">More infos</button>
+      <button class="btn btn-primary" (click)="editBook(book.id)">Edit</button>
       <button class="btn btn-danger" (click)="deleteBook(book.id)">Delete</button>
     </div>
   </div>

@@ -9,10 +9,17 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [BookListComponent, BookFormComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, BooksRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BooksRoutingModule,
+    NgbDatepickerModule,
+  ],
   providers: [BookService, provideHttpClient(withInterceptorsFromDi())],
 })
 export class BooksModule {}

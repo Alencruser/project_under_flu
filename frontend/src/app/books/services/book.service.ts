@@ -30,7 +30,7 @@ export class BookService implements IBookService {
   }
 
   createBook(book: Book): Observable<Book> {
-    const newBook = { ...book, lastModified: new Date() };
+    const newBook = { ...book };
     return this.apiService.addBook(newBook);
   }
 
