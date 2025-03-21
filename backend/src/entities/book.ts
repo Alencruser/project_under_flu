@@ -28,5 +28,5 @@ export class Book {
     published_date!: Date;
 
     @UpdateDateColumn()
-    last_modification_date?: Date;
+    last_modification_date!: Date;
 }
