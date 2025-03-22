@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../models/book.interface'; // Book interface for type safety
 import { BookService } from '../services/book.service'; // Business logic service
 import { debounceTime, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-list',
@@ -15,7 +16,10 @@ export class BookListComponent implements OnInit {
 
   private searchSubject = new Subject<string>();
 
-  constructor(private bookService: BookService) {
+  constructor(
+    private bookService: BookService,
+    private router: Router
+  ) {
     this.searchSubject.pipe(debounceTime(600)).subscribe((title: string) => {
       if (title.trim().length) {
         this.searchBooksByTitle(title);
@@ -57,5 +61,9 @@ export class BookListComponent implements OnInit {
 
   searchTitleChange() {
     this.searchSubject.next(this.searchTitle);
+  }
+
+  navigateToAddBook() {
+    this.router.navigate(['/add']);
   }
 }
