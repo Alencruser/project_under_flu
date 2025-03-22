@@ -2,6 +2,7 @@ import { Component, Input, OnInit, output, Output } from '@angular/core';
 import { Book } from '../models/book.interface';
 import { BookService } from '../services/book.service';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/alert/services/alert.service';
 
 @Component({
   selector: 'app-book-card',
@@ -15,7 +16,8 @@ export class BookCardComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {}
@@ -38,11 +40,11 @@ export class BookCardComponent implements OnInit {
       this.bookService.removeBook(bookId).subscribe({
         next: () => {
           this.confirmDelete.emit(this.book.id);
-          alert('Book deleted successfully!');
+          this.alertService.showAlert('success', 'Book deleted successfully');
         },
         error: (error) => {
           console.error('Error deleting book:', error);
-          alert('Failed to delete the book.');
+          this.alertService.showAlert('warning', 'Failed to delete the book');
         },
       });
     }
