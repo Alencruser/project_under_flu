@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from '../services/book.service'; // Business logic service
 import { Book } from '../models/book.interface'; // Book interface for type safety
-import { Router } from '@angular/router'; // For navigation (e.g., to the edit form)
+import { BookService } from '../services/book.service'; // Business logic service
 
 @Component({
   selector: 'app-book-list',
