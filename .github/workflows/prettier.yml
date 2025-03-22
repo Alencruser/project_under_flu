@@ -1,0 +1,43 @@
+name: Prettier Formatting
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  format:
+    name: Run Prettier
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install --legacy-peer-deps
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm install --legacy-peer-deps
+
+      - name: Run Prettier on frontend
+        run: npx prettier --check frontend
+
+      - name: Run Prettier on backend
+        run: npx prettier --check backend
+
+      - name: Fail if formatting issues found
+        if: failure()
+        run: echo "Prettier found unformatted files. Please run "npx prettier --write ." locally and commit the changes." && exit 1
