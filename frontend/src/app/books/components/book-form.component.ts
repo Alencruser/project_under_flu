@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookService } from '../services/book.service';
 import { Book } from '../models/book.interface';
 import { NgbInputDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from 'src/app/alert/services/alert.service';
 @Component({
   selector: 'app-book-form',
   templateUrl: './book-form.component.html',
@@ -21,7 +22,8 @@ export class BookFormComponent implements OnInit {
     private bookService: BookService,
     private route: ActivatedRoute,
     public router: Router,
-    private config: NgbInputDatepickerConfig
+    private config: NgbInputDatepickerConfig,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -93,6 +95,10 @@ export class BookFormComponent implements OnInit {
     };
   }
 
+  formInvalid() {
+    return this.bookForm.invalid || !this.bookDatePickerValue;
+  }
+
   onSubmit(): void {
     if (this.bookForm.invalid || !this.bookDatePickerValue) return;
 
@@ -110,11 +116,25 @@ export class BookFormComponent implements OnInit {
           id: this.bookId,
           last_modification_date: new Date(),
         })
-        .subscribe(() => this.router.navigate(['/']));
+        .subscribe({
+          next: () => {
+            this.alertService.showAlert('success', 'Book edited successfully');
+          },
+          error: (err) => {
+            this.alertService.showAlert('danger', err);
+          },
+          complete: () => {
+            this.router.navigate(['/']);
+          },
+        });
     } else {
-      this.bookService
-        .createBook(book)
-        .subscribe(() => this.router.navigate(['/']));
+      this.bookService.createBook(book).subscribe({
+        next: () => {
+          this.alertService.showAlert('success', 'Book created successfully');
+        },
+        error: (err) => this.alertService.showAlert('danger', err),
+        complete: () => this.router.navigate(['/']),
+      });
     }
   }
 }
