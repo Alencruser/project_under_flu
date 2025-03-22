@@ -13,6 +13,8 @@ export class BookFormComponent implements OnInit {
   bookForm!: FormGroup;
   isEditMode = false;
   bookId?: number;
+  bookDatePickerValue: { year: number; month: number; day: number } | null =
+    null;
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +42,6 @@ export class BookFormComponent implements OnInit {
       author: ['', Validators.required],
       note: [''],
       cover: [''],
-      published_date: ['', Validators.required],
     });
   }
 
@@ -58,14 +59,10 @@ export class BookFormComponent implements OnInit {
   private loadBookData(id: number): void {
     this.bookService.getBook(id).subscribe((book) => {
       if (book) {
-        console.log('wut', typeof book.published_date);
-        const formatedBook = {
-          ...book,
-          published_date: this.transformDateToDatePickerValue(
-            book.published_date
-          ),
-        };
-        this.bookForm.patchValue(formatedBook);
+        this.bookForm.patchValue(book);
+        this.bookDatePickerValue = this.transformDateToDatePickerValue(
+          book.published_date
+        );
       }
     });
   }
@@ -80,26 +77,27 @@ export class BookFormComponent implements OnInit {
     return new Date(`${typedDate.year}/${typedDate.month}/${typedDate.day}`);
   }
 
-  private transformDateToDatePickerValue(date: Date): {
+  private transformDateToDatePickerValue(date: string): {
     year: number;
     month: number;
     day: number;
   } {
+    const splitDate = date.split('-');
     return {
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      day: date.getDate(),
+      year: Number(splitDate[0]),
+      month: Number(splitDate[1]),
+      day: Number(splitDate[2]),
     };
   }
 
   onSubmit(): void {
-    if (this.bookForm.invalid) return;
+    if (this.bookForm.invalid || !this.bookDatePickerValue) return;
 
-    this.bookForm.value.published_date = this.transformDatepickerValueToDate(
-      this.bookForm.value.published_date
-    );
     const book: Book = {
       ...this.bookForm.value,
+      published_date: this.transformDatepickerValueToDate(
+        this.bookForm.value.published_date
+      ),
     };
 
     if (this.isEditMode && this.bookId) {

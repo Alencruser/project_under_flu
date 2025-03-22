@@ -1,11 +1,10 @@
+import "reflect-metadata";
 import {
+    Column,
     Entity,
     PrimaryGeneratedColumn,
-    Column,
-    CreateDateColumn,
     UpdateDateColumn,
 } from "typeorm";
-import "reflect-metadata";
 
 @Entity()
 export class Book {
@@ -24,7 +23,7 @@ export class Book {
     @Column({ type: "text", nullable: true })
     cover?: string;
 
-    @CreateDateColumn()
+    @Column({ type: "date" })
     published_date!: Date;
 
     @UpdateDateColumn()

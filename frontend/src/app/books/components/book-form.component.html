@@ -21,7 +21,8 @@
           placeholder="yyyy-mm-dd"
           name="dp"
           ngbDatepicker
-          formControlName="published_date"
+          [(ngModel)]="bookDatePickerValue"
+          [ngModelOptions]="{standalone:true}"
           #d="ngbDatepicker"
         />
         <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
