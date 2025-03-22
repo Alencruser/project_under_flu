@@ -12,10 +12,15 @@ import { Router } from '@angular/router'; // For navigation (e.g., to the edit f
 export class BookListComponent implements OnInit {
   books: Book[] = [];
 
-  constructor(private bookService: BookService, private router: Router) {}
+  constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
     this.loadBooks();
+  }
+
+  // ici faire le retour de fonction du delete pour
+  handleBookDeletion(bookId: number) {
+    this.books = this.books.filter((book) => book.id !== bookId);
   }
 
   loadBooks(): void {
@@ -27,32 +32,5 @@ export class BookListComponent implements OnInit {
         console.error('Error fetching books:', error);
       },
     });
-  }
-
-  getBookCover(book: Book) {
-    return book.cover || 'assets/basic-book.jpg';
-  }
-
-  openBookForm(): void {
-    this.router.navigate(['/add']);
-  }
-
-  editBook(bookId: number): void {
-    this.router.navigate([`/edit/`, bookId]);
-  }
-
-  deleteBook(bookId: number): void {
-    if (confirm('Are you sure you want to delete this book?')) {
-      this.bookService.removeBook(bookId).subscribe({
-        next: () => {
-          this.books = this.books.filter((book) => book.id !== bookId);
-          alert('Book deleted successfully!');
-        },
-        error: (error) => {
-          console.error('Error deleting book:', error);
-          alert('Failed to delete the book.');
-        },
-      });
-    }
   }
 }

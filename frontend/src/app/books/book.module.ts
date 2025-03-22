@@ -1,18 +1,19 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BooksRoutingModule } from './books-routing.module';
-import { BookListComponent } from './components/book-list.component';
-import { BookFormComponent } from './components/book-form.component';
-import { BookService } from './services/book.service';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { BooksRoutingModule } from './books-routing.module';
+import { BookCardComponent } from './components/book-card.component';
+import { BookFormComponent } from './components/book-form.component';
+import { BookListComponent } from './components/book-list.component';
+import { BookService } from './services/book.service';
 
 @NgModule({
-  declarations: [BookListComponent, BookFormComponent],
+  declarations: [BookListComponent, BookFormComponent, BookCardComponent],
   imports: [
     CommonModule,
     FormsModule,

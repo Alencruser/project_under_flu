@@ -1,16 +1,5 @@
 <div class="book-list row">
-  <div *ngFor="let book of books" class="card col-12 col-md-4 col-lg-3" style="height: 400px;">
-    <!-- Image with fixed height -->
-    <img [src]="getBookCover(book)" class="card-img-top" alt="Image" style="height: 60%; object-fit: contain;">
-    <!-- remove thhe padding right for img -->
-    <!-- Card Body with a flexible layout and overflow management -->
-    <div class="card-body d-flex flex-column" style="height: 40%; overflow-y: auto;"> 
-      <h5 class="card-title">{{book.title}}</h5>
-      <p class="card-text">Published: {{ book.published_date | date }} by {{ book.author }}</p>
-    </div>
-    <div class="card-footer d-flex justify-content-between">
-      <button class="btn btn-primary" (click)="editBook(book.id)">Edit</button>
-      <button class="btn btn-danger" (click)="deleteBook(book.id)">Delete</button>
-    </div>
-  </div>
+<div *ngFor="let book of books" class="col-12 col-md-4 col-lg-3">
+  <app-book-card [book]="book" (confirmDelete)="handleBookDeletion($event)"></app-book-card>
+</div>
 </div>
