@@ -72,9 +72,12 @@ export class BookFormComponent implements OnInit {
     month: number;
     day: number;
   }): Date {
-    const typedDate: { year: number; month: number; day: number } =
-      datepickerValue;
-    return new Date(`${typedDate.year}/${typedDate.month}/${typedDate.day}`);
+    return new Date(
+      `${datepickerValue.year}-${String(datepickerValue.month).padStart(
+        2,
+        '0'
+      )}-${String(datepickerValue.day).padStart(2, '0')}`
+    );
   }
 
   private transformDateToDatePickerValue(date: string): {
@@ -96,12 +99,11 @@ export class BookFormComponent implements OnInit {
     const book: Book = {
       ...this.bookForm.value,
       published_date: this.transformDatepickerValueToDate(
-        this.bookForm.value.published_date
+        this.bookDatePickerValue
       ),
     };
 
     if (this.isEditMode && this.bookId) {
-      console.log('jedit');
       this.bookService
         .editBook({
           ...book,
