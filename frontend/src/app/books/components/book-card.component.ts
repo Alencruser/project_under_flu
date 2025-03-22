@@ -13,7 +13,10 @@ export class BookCardComponent implements OnInit {
 
   confirmDelete = output<number>();
 
-  constructor(private bookService: BookService, private router: Router) {
+  constructor(
+    private bookService: BookService,
+    private router: Router
+  ) {
     console.log(this);
   }
 

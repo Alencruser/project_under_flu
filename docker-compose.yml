@@ -3,7 +3,7 @@ services:
     build: ./frontend
     container_name: angular_frontend
     ports:
-      - "4200:80"
+      - '4200:80'
     depends_on:
       - backend
 
@@ -11,7 +11,7 @@ services:
     build: ./backend
     container_name: express_backend
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - db
     environment:
@@ -30,7 +30,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: booksdb
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
 

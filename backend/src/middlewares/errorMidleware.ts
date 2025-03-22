@@ -1,17 +1,17 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 const errorMiddleware = (
-    err: Error,
-    req: Request,
-    res: Response,
-    next: NextFunction
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
 ) => {
-    console.error("Error: ", err);
+  console.error('Error: ', err);
 
-    res.status(500).json({
-        message: "Internal Server Error",
-        error: err.message || "Something went wrong",
-    });
+  res.status(500).json({
+    message: 'Internal Server Error',
+    error: err.message || 'Something went wrong',
+  });
 };
 
 export default errorMiddleware;
