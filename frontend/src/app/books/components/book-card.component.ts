@@ -24,6 +24,11 @@ export class BookCardComponent implements OnInit {
     return book.cover || 'assets/basic-book.jpg';
   }
 
+  isNoteWritten(): boolean {
+    if (this.book.note) return this.book.note.trim().length > 0;
+    return false;
+  }
+
   editBook(bookId: number): void {
     this.router.navigate([`/edit/`, bookId]);
   }
