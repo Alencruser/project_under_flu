@@ -7,6 +7,7 @@ import { BooksModule } from './books/book.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarModule } from './navbar/navbar.module';
+import { AlertModule } from './alert/alert.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { NavbarModule } from './navbar/navbar.module';
     NoopAnimationsModule,
     NgbModule,
     NavbarModule,
+    AlertModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
