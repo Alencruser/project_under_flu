@@ -16,9 +16,7 @@ export class BookCardComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private router: Router
-  ) {
-    console.log(this);
-  }
+  ) {}
 
   ngOnInit(): void {}
 

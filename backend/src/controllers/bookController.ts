@@ -2,9 +2,15 @@ import { Request, Response } from 'express';
 import { bookService } from '../services/bookService'; // Import the instance
 
 class BookController {
-  async getAllBooks(req: Request, res: Response) {
-    const books = await bookService.getAllBooks();
-    res.json(books);
+  async getMultipleBooks(req: Request, res: Response) {
+    const { title } = req.query;
+    if (title) {
+      const books = await bookService.getBooksByTitle(title as string);
+      res.json(books);
+    } else {
+      const books = await bookService.getAllBooks();
+      res.json(books);
+    }
   }
 
   async getBookById(req: Request, res: Response) {

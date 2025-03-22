@@ -8,7 +8,7 @@ import { IBookApiService } from './book-api-service.interface';
   providedIn: 'root',
 })
 export class BookApiService implements IBookApiService {
-  private apiUrl = 'http://localhost:3000/books/';
+  private apiUrl = 'http://localhost:3000/books';
 
   constructor(private http: HttpClient) {}
 
@@ -18,6 +18,12 @@ export class BookApiService implements IBookApiService {
 
   getBookById(id: number): Observable<Book> {
     return this.http.get<Book>(`${this.apiUrl}/${id}`);
+  }
+
+  getBooksByTitle(title: string): Observable<Book[]> {
+    return this.http.get<Book[]>(
+      `${this.apiUrl}?title=${encodeURIComponent(title)}`
+    );
   }
 
   addBook(book: Book): Observable<Book> {

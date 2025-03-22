@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../models/book.interface'; // Book interface for type safety
 import { BookService } from '../services/book.service'; // Business logic service
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-book-list',
@@ -10,16 +11,33 @@ import { BookService } from '../services/book.service'; // Business logic servic
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];
+  searchTitle: string = '';
 
-  constructor(private bookService: BookService) {}
+  private searchSubject = new Subject<string>();
+
+  constructor(private bookService: BookService) {
+    this.searchSubject.pipe(debounceTime(600)).subscribe((title: string) => {
+      if (title.trim().length) {
+        this.searchBooksByTitle(title);
+      } else {
+        this.loadBooks();
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loadBooks();
   }
 
-  // ici faire le retour de fonction du delete pour
-  handleBookDeletion(bookId: number) {
-    this.books = this.books.filter((book) => book.id !== bookId);
+  searchBooksByTitle(title: string): void {
+    this.bookService.getBooksByTitle(title).subscribe({
+      next: (data: Book[]) => {
+        this.books = data;
+      },
+      error: (error) => {
+        console.error('Error fetching books:', error);
+      },
+    });
   }
 
   loadBooks(): void {
@@ -31,5 +49,13 @@ export class BookListComponent implements OnInit {
         console.error('Error fetching books:', error);
       },
     });
+  }
+
+  handleBookDeletion(bookId: number) {
+    this.books = this.books.filter((book) => book.id !== bookId);
+  }
+
+  searchTitleChange() {
+    this.searchSubject.next(this.searchTitle);
   }
 }

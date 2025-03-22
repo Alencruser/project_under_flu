@@ -4,7 +4,7 @@ import { bookController } from '../controllers/bookController';
 const router = Router();
 
 router.get('/', (req, res, next) => {
-  bookController.getAllBooks(req, res).catch(next);
+  bookController.getMultipleBooks(req, res).catch(next);
 });
 
 router.get('/:id', (req, res, next) => {

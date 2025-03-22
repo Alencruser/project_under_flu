@@ -25,6 +25,19 @@ export class BookService implements IBookService {
     );
   }
 
+  getBooksByTitle(title: string): Observable<Book[]> {
+    return this.apiService.getBooksByTitle(title).pipe(
+      map((books) =>
+        books.sort(
+          (a, b) =>
+            //todo trouver le moyen de corriger ca
+            new Date(b.last_modification_date).getTime() -
+            new Date(a.last_modification_date).getTime()
+        )
+      )
+    );
+  }
+
   getBook(id: number): Observable<Book> {
     return this.apiService.getBookById(id);
   }

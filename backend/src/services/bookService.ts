@@ -1,5 +1,6 @@
 import { BookRepository } from '../repositories/bookRepository';
 import { Book } from '../entities/book';
+import { ILike } from 'typeorm';
 
 export class BookService {
   async getAllBooks(): Promise<Book[]> {
@@ -8,6 +9,12 @@ export class BookService {
 
   async getBookById(id: number): Promise<Book | null> {
     return await BookRepository.findOneBy({ id });
+  }
+
+  async getBooksByTitle(title: string): Promise<Book[]> {
+    return await BookRepository.find({
+      where: { title: ILike(`%${title}%`) },
+    });
   }
 
   async createBook(data: Partial<Book>): Promise<Book> {
