@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from '../models/book.interface'; // Book interface for type safety
-import { BookService } from '../services/book.service'; // Business logic service
-import { debounceTime, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { debounceTime, Subject } from 'rxjs';
+import { Book } from '../models/book.interface';
+import { BookService } from '../services/book.service';
 
 @Component({
   selector: 'app-book-list',
