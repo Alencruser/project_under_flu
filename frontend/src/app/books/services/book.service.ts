@@ -11,31 +11,32 @@ import { IBookService } from './book-service.interface';
 export class BookService implements IBookService {
   constructor(private apiService: BookApiService) {}
 
-  // Business logic for fetching all books, e.g., sorting them by last modified
   getAllBooks(): Observable<Book[]> {
-    return this.apiService.getBooks().pipe(
-      map((books) =>
-        books.sort(
-          (a, b) =>
-            //todo trouver le moyen de corriger ca
-            new Date(b.last_modification_date).getTime() -
-            new Date(a.last_modification_date).getTime()
+    return this.apiService
+      .getBooks()
+      .pipe(
+        map((books) =>
+          books.sort(
+            (a, b) =>
+              new Date(b.last_modification_date).getTime() -
+              new Date(a.last_modification_date).getTime()
+          )
         )
-      )
-    );
+      );
   }
 
   getBooksByTitle(title: string): Observable<Book[]> {
-    return this.apiService.getBooksByTitle(title).pipe(
-      map((books) =>
-        books.sort(
-          (a, b) =>
-            //todo trouver le moyen de corriger ca
-            new Date(b.last_modification_date).getTime() -
-            new Date(a.last_modification_date).getTime()
+    return this.apiService
+      .getBooksByTitle(title)
+      .pipe(
+        map((books) =>
+          books.sort(
+            (a, b) =>
+              new Date(b.last_modification_date).getTime() -
+              new Date(a.last_modification_date).getTime()
+          )
         )
-      )
-    );
+      );
   }
 
   getBook(id: number): Observable<Book> {

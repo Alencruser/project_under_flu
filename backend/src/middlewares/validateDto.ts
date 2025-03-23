@@ -1,4 +1,3 @@
-// validateDto.ts - the asynchronous DTO validation logic
 import { Request, Response, NextFunction } from 'express';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
