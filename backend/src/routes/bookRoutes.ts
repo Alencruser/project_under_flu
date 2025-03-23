@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { bookController } from '../controllers/bookController';
 import { validateDtoMiddleware } from '../middlewares/validateDto';
 import { CreateBookDTO } from '../dtos/createBook.dto';
-import { asyncHandler } from '../middlewares/asyncHandler';
+import { asyncHandler } from '../utils/asyncHandler';
 
 const router = Router();
 
