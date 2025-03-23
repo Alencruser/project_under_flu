@@ -73,13 +73,11 @@ export class BookFormComponent implements OnInit {
     year: number;
     month: number;
     day: number;
-  }): Date {
-    return new Date(
-      `${datepickerValue.year}-${String(datepickerValue.month).padStart(
-        2,
-        '0'
-      )}-${String(datepickerValue.day).padStart(2, '0')}`
-    );
+  }): string {
+    return `${datepickerValue.year}-${String(datepickerValue.month).padStart(
+      2,
+      '0'
+    )}-${String(datepickerValue.day).padStart(2, '0')}`;
   }
 
   private transformDateToDatePickerValue(date: string): {
@@ -114,7 +112,6 @@ export class BookFormComponent implements OnInit {
         .editBook({
           ...book,
           id: this.bookId,
-          last_modification_date: new Date(),
         })
         .subscribe({
           next: () => {
