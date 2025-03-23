@@ -38,8 +38,8 @@ export class BookListComponent implements OnInit {
       next: (data: Book[]) => {
         this.books = data;
       },
-      error: (error) => {
-        console.error('Error fetching books:', error);
+      error: (err) => {
+        console.error('Error fetching books:', err.error.message);
       },
     });
   }
@@ -49,8 +49,8 @@ export class BookListComponent implements OnInit {
       next: (data: Book[]) => {
         this.books = data;
       },
-      error: (error) => {
-        console.error('Error fetching books:', error);
+      error: (err) => {
+        console.error('Error fetching books:', err.error.message);
       },
     });
   }

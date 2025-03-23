@@ -118,7 +118,7 @@ export class BookFormComponent implements OnInit {
             this.alertService.showAlert('success', 'Book edited successfully');
           },
           error: (err) => {
-            this.alertService.showAlert('danger', err);
+            this.alertService.showAlert('danger', err.error.message);
           },
           complete: () => {
             this.router.navigate(['/']);
@@ -129,7 +129,8 @@ export class BookFormComponent implements OnInit {
         next: () => {
           this.alertService.showAlert('success', 'Book created successfully');
         },
-        error: (err) => this.alertService.showAlert('danger', err),
+        error: (err) =>
+          this.alertService.showAlert('danger', err.error.message),
         complete: () => this.router.navigate(['/']),
       });
     }

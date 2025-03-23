@@ -43,8 +43,8 @@ export class BookCardComponent implements OnInit {
           this.confirmDelete.emit(this.book.id);
           this.alertService.showAlert('success', 'Book deleted successfully');
         },
-        error: (error) => {
-          console.error('Error deleting book:', error);
+        error: (err) => {
+          console.error('Error deleting book:', err.error.message);
           this.alertService.showAlert('warning', 'Failed to delete the book');
         },
       });
