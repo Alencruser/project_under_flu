@@ -20,8 +20,12 @@ class BookController {
   }
 
   async createBook(req: Request, res: Response) {
-    const book = await bookService.createBook(req.body);
-    res.status(201).json(book);
+    try {
+      const book = await bookService.createBook(req.body);
+      res.status(201).json(book);
+    } catch (error) {
+      res.status(500).json({ message: 'Error creating book', error });
+    }
   }
 
   async updateBook(req: Request, res: Response) {
