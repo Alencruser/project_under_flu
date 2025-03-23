@@ -1,0 +1,27 @@
+<div #flipContainer class="book col-sm-12 col-lg-6 offset-lg-3">
+  <!-- Cover Page -->
+  <div class="page cover">
+    <img [src]="getBookCover()" alt="Cover" loading="lazy" />
+  </div>
+
+  <!-- Inside Pages -->
+  <div class="page">
+    <h2>Title :</h2>
+    <span class="mb-3">{{ book.title }}</span>
+    <h3>Published :</h3>
+    <span
+      >Published: {{ book.published_date | date }} by {{ book.author }}</span
+    >
+  </div>
+
+  <div class="page">
+    <h2>Personnal note :</h2>
+    <p>{{ getBookNote() }}</p>
+  </div>
+</div>
+
+<!-- Navigation Buttons -->
+<div class="col-sm-12 col-lg-6 offset-lg-3 d-flex justify-content-around">
+  <button (click)="prevPage()" class="btn btn-primary">Previous</button>
+  <button (click)="nextPage()" class="btn btn-primary">Next</button>
+</div>

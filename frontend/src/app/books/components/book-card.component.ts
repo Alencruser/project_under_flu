@@ -7,6 +7,7 @@ import { AlertService } from 'src/app/alert/services/alert.service';
 @Component({
   selector: 'app-book-card',
   templateUrl: './book-card.component.html',
+  styleUrls: ['./book-card.component.scss'],
   standalone: false,
 })
 export class BookCardComponent implements OnInit {
@@ -48,5 +49,9 @@ export class BookCardComponent implements OnInit {
         },
       });
     }
+  }
+
+  viewBook() {
+    this.router.navigate(['/view'], { state: { book: this.book } });
   }
 }

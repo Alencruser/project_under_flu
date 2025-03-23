@@ -11,9 +11,15 @@ import { BookCardComponent } from './components/book-card.component';
 import { BookFormComponent } from './components/book-form.component';
 import { BookListComponent } from './components/book-list.component';
 import { BookService } from './services/book.service';
+import { BookViewComponent } from './components/book-view.component';
 
 @NgModule({
-  declarations: [BookListComponent, BookFormComponent, BookCardComponent],
+  declarations: [
+    BookListComponent,
+    BookFormComponent,
+    BookCardComponent,
+    BookViewComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
