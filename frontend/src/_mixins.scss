@@ -1,0 +1,27 @@
+@use 'sass:map';
+
+$breakpoints: (
+  mobile: 600px,
+  tablet: 1024px,
+  desktop: 1440px,
+);
+
+@mixin for-screen-size($type) {
+  $mobile: map.get($breakpoints, mobile);
+  $tablet: map.get($breakpoints, tablet);
+  $desktop: map.get($breakpoints, desktop);
+
+  @if $type == mobile {
+    @media (max-width: $mobile) {
+      @content;
+    }
+  } @else if $type == tablet {
+    @media (min-width: ($mobile + 1px)) and (max-width: $tablet) {
+      @content;
+    }
+  } @else if $type == desktop {
+    @media (min-width: ($tablet + 1px)) {
+      @content;
+    }
+  }
+}

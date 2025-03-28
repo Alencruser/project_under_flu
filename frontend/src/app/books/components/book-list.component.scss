@@ -1,0 +1,22 @@
+@use '../../../mixins' as *;
+
+.card-list {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+  div {
+    box-sizing: border-box;
+    @include for-screen-size(mobile) {
+      width: 100%;
+    }
+
+    @include for-screen-size(tablet) {
+      width: 33%;
+    }
+
+    @include for-screen-size(desktop) {
+      width: 25%;
+    }
+  }
+}
