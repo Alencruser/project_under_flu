@@ -1,5 +1,5 @@
 @if (message) {
-  <div class="col-sm-12 col-lg-6 offset-lg-3">
+  <div class="app-alert">
     <ngb-alert #selfClosingAlert [type]="type" (closed)="message = ''">{{
       message
     }}</ngb-alert>

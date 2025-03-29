@@ -1,4 +1,4 @@
-<div #flipContainer class="book col-sm-12 col-lg-6 offset-lg-3">
+<div #flipContainer class="book">
   <!-- Cover Page -->
   <div class="page cover">
     <img [src]="getBookCover()" alt="Cover" loading="lazy" />
@@ -7,7 +7,8 @@
   <!-- Inside Pages -->
   <div class="page">
     <h2>Title :</h2>
-    <span class="mb-3">{{ book.title }}</span>
+    <span id="book-title">{{ book.title }}</span>
+    <hr />
     <h3>Published :</h3>
     <span
       >Published: {{ book.published_date | date }} by {{ book.author }}</span
@@ -21,7 +22,7 @@
 </div>
 
 <!-- Navigation Buttons -->
-<div class="col-sm-12 col-lg-6 offset-lg-3 d-flex justify-content-around">
+<div class="book-actions">
   <button (click)="prevPage()" class="btn btn-primary">Previous</button>
   <button (click)="nextPage()" class="btn btn-primary">Next</button>
 </div>

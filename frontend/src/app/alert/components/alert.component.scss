@@ -1,8 +1,16 @@
-.alert-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1050;
-  min-width: 250px;
-  max-width: 400px;
+@use '../../../mixins' as *;
+
+.app-alert {
+  @include for-screen-size(mobile) {
+    width: 100%;
+  }
+
+  @include for-screen-size(tablet) {
+    width: 100%;
+  }
+
+  @include for-screen-size(desktop) {
+    width: 50%;
+    margin-left: 25%;
+  }
 }
