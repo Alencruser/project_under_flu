@@ -14,6 +14,7 @@ export class BookFormComponent implements OnInit {
   bookForm!: FormGroup;
   isEditMode = false;
   bookId?: number;
+  bookName?: string;
   bookDatePickerValue: { year: number; month: number; day: number } | null =
     null;
 
@@ -36,6 +37,10 @@ export class BookFormComponent implements OnInit {
       day: date.getDate(),
     };
     this.checkEditMode();
+  }
+
+  public getTemplatename(): string {
+    return this.isEditMode ? `Edit ${this.bookName}` : 'Add a new book';
   }
 
   private initializeForm(): void {
@@ -65,6 +70,7 @@ export class BookFormComponent implements OnInit {
         this.bookDatePickerValue = this.transformDateToDatePickerValue(
           book.published_date
         );
+        this.bookName = book.title;
       }
     });
   }
