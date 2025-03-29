@@ -3,6 +3,11 @@
 .top-panel {
   display: flex;
   margin-bottom: 24px;
+
+  button {
+    border-radius: 20px;
+  }
+
   @include for-screen-size(mobile) {
     width: 100%;
   }
