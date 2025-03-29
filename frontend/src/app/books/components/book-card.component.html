@@ -3,7 +3,7 @@
     [src]="getBookCover(book)"
     class="card-img-top"
     alt="cover of the book"
-    loading="lazy"
+    [loading]="GetBookCoverLoading(book)"
     (click)="viewBook()"
   />
   <div class="book-title" title="{{ book.title }}">
