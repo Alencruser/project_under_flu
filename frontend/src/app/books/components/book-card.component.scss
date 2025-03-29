@@ -1,3 +1,30 @@
-.card-img-top {
-  cursor: pointer;
+.book-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  img {
+    object-fit: fill;
+    width: 180px;
+    height: 270px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    border: solid 1px grey;
+  }
+
+  .book-title > h5 {
+    display: block;
+    width: 180px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .book-actions {
+    display: flex;
+    width: 180px;
+    justify-content: space-between;
+  }
 }
