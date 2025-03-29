@@ -26,5 +26,9 @@
     display: flex;
     width: 180px;
     justify-content: space-between;
+
+    button {
+      border-radius: 30px;
+    }
   }
 }
