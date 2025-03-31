@@ -21,12 +21,11 @@ export class Book {
   @Column()
   author!: string;
 
-  @Column({
-    type: 'integer',
-    nullable: true,
-    default: null,
-  })
+  @Column({ type: 'text', nullable: true })
   note?: number;
+
+  @Column({ type: 'integer', nullable: true })
+  rating?: number;
 
   @Column({ type: 'text', nullable: true })
   cover?: string;
