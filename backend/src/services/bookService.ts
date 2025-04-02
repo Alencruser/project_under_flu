@@ -2,8 +2,9 @@ import { BookRepository } from '../repositories/bookRepository';
 import { Book } from '../entities/book';
 import { IBookRepository } from 'repositories/interfaces/bookRepository.interface';
 import { DeleteResult } from 'typeorm';
+import { IBookService } from './interfaces/bookService.interface';
 
-export class BookService {
+export class BookService implements IBookService {
   private bookRepository: IBookRepository;
 
   constructor(bookRepository: IBookRepository) {
@@ -41,4 +42,4 @@ export class BookService {
   }
 }
 const bookRepository = new BookRepository();
-export const bookService = new BookService(bookRepository);
+export const bookService: IBookService = new BookService(bookRepository);
