@@ -1,5 +1,16 @@
 # project_under_flu
 
+⚠️ In case .env is upgraded before you opened the project, here it is :
+
+DB_USER=user
+DB_PASSWORD=password
+DB_NAME=booksdb
+DB_HOST=localhost
+DB_PORT=5432
+JWT_SECRET="itsNotImportantSinceItsLocal"
+
+in the root of "backend" directory.
+
 # Build a dockerized Full-Stack TypeScript application
 
 You’re free to choose your stack :
