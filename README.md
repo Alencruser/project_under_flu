@@ -2,12 +2,12 @@
 
 ⚠️ In case .env is upgraded before you opened the project, here it is :
 
-DB_USER=user
-DB_PASSWORD=password
-DB_NAME=booksdb
-DB_HOST=localhost
-DB_PORT=5432
-JWT_SECRET="itsNotImportantSinceItsLocal"
+- DB_USER=user
+- DB_PASSWORD=password
+- DB_NAME=booksdb
+- DB_HOST=localhost
+- DB_PORT=5432
+- JWT_SECRET="itsNotImportantSinceItsLocal"
 
 in the root of "backend" directory.
 
