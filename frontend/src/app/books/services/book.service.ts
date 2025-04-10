@@ -49,7 +49,7 @@ export class BookService implements IBookService {
   }
 
   editBook(book: Book): Observable<Book> {
-    const updatedBook = { ...book, lastModified: new Date() };
+    const updatedBook = { ...book };
     return this.apiService.updateBook(updatedBook);
   }
 

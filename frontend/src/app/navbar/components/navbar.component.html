@@ -1,5 +1,22 @@
-<nav class="navbar bg-light border-body" data-bs-theme="light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">My personnal books</a>
+<nav class="navbar">
+  <a class="navbar-brand" href="#">My personnal books</a>
+
+  <div *ngIf="isConnected()">
+    <button
+      class="navbar-toggler"
+      (click)="toggleMenu()"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <ul class="navbar-nav" [class.open]="isMenuOpen">
+      <li class="nav-item dropdown" tabindex="0">
+        <a class="nav-link dropdown-toggle">Welcome, {{ getUsername() }}</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </nav>

@@ -4,6 +4,7 @@ import { UserRepository } from '../repositories/userRepository';
 import { cryptService } from './cryptService';
 import { User } from '../entities/user';
 import { jwtService } from './jwtService';
+import { InvalidCredentialsError } from '../errors/invalid-credentials-error';
 
 export class AuthService implements IAuthService {
   private userRepository: IUserRepository;
@@ -15,19 +16,21 @@ export class AuthService implements IAuthService {
   async register(data: User) {
     data.password = cryptService.hashPassword(data.password);
     const user = this.userRepository.create(data);
-    return await this.userRepository.save(user);
+    const savedUser = await this.userRepository.save(user);
+    const token = jwtService.sign(`${savedUser.username}_${savedUser.id}`);
+    return { ...savedUser, jwt: token };
   }
 
   async connect(data: User): Promise<User & { jwt: string }> {
     const savedUser = await this.userRepository.findOneBy({
       username: data.username,
     });
-    if (!savedUser) throw new Error('User or password unknown');
-    if (cryptService.checkPasswordMatch(data.password, savedUser?.password)) {
-      const token = jwtService.sign(savedUser.username);
-      return { ...savedUser, jwt: token };
+    if (!savedUser) throw new InvalidCredentialsError();
+    if (cryptService.checkPasswordMatch(data.password, savedUser!.password)) {
+      const token = jwtService.sign(`${savedUser!.username}_${savedUser!.id}`);
+      return { ...savedUser!, jwt: token };
     }
-    throw new Error('User or password unknown');
+    throw new InvalidCredentialsError();
   }
 }
 const userRepository: IUserRepository = new UserRepository();

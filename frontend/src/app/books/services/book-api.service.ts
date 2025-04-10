@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthHttpClientService } from 'src/app/auth/services/auth-http-client.service';
 import { Book } from '../models/book.interface';
 import { IBookApiService } from './book-api-service.interface';
 
@@ -10,7 +10,8 @@ import { IBookApiService } from './book-api-service.interface';
 export class BookApiService implements IBookApiService {
   private apiUrl = 'http://localhost:3000/books';
 
-  constructor(private http: HttpClient) {}
+  //use of AuthHttp instead of http to take care of login state
+  constructor(private http: AuthHttpClientService) {}
 
   getBooks(): Observable<Book[]> {
     return this.http.get<Book[]>(this.apiUrl);

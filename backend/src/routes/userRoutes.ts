@@ -11,7 +11,7 @@ router.post(
   '/connect',
   asyncHandler(validateDtoMiddleware(ConnectUserDTO)),
   (req, res, next) => {
-    userController.connectUser(req, res).catch(next);
+    userController.connectUser(req, res).catch((err) => next(err));
   }
 );
 
