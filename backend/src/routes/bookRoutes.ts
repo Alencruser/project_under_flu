@@ -7,17 +7,23 @@ import { isConnectedMiddleware } from '../middlewares/isConnectedMiddleware';
 
 const router = Router();
 
-router.get('/', isConnectedMiddleware, (req, res, next) => {
-  bookController.getMultipleBooks(req, res).catch(next);
-});
+router.get(
+  '/',
+  /*isConnectedMiddleware,*/ (req, res, next) => {
+    bookController.getMultipleBooks(req, res).catch(next);
+  }
+);
 
-router.get('/:id', isConnectedMiddleware, (req, res, next) => {
-  bookController.getBookById(req, res).catch(next);
-});
+router.get(
+  '/:id',
+  /*isConnectedMiddleware,*/ (req, res, next) => {
+    bookController.getBookById(req, res).catch(next);
+  }
+);
 
 router.post(
   '/',
-  isConnectedMiddleware,
+  /*isConnectedMiddleware,*/
   asyncHandler(validateDtoMiddleware(CreateBookDTO)),
   (req, res, next) => {
     bookController.createBook(req, res).catch(next);
@@ -26,15 +32,18 @@ router.post(
 
 router.put(
   '/:id',
-  isConnectedMiddleware,
+  /*isConnectedMiddleware,*/
   asyncHandler(validateDtoMiddleware(CreateBookDTO)),
   (req, res, next) => {
     bookController.updateBook(req, res).catch(next);
   }
 );
 
-router.delete('/:id', isConnectedMiddleware, (req, res, next) => {
-  bookController.deleteBook(req, res).catch(next);
-});
+router.delete(
+  '/:id',
+  /*isConnectedMiddleware,*/ (req, res, next) => {
+    bookController.deleteBook(req, res).catch(next);
+  }
+);
 
 export default router;
