@@ -39,6 +39,18 @@ class BookController {
     if (!success) return res.status(404).json({ message: 'Book not found' });
     res.status(204).send();
   }
+
+  async rateBook(req: Request, res: Response) {
+    if (!req.user?.id)
+      return res.status(401).json({ message: 'User not found' });
+    const success = await bookService.rateBook(
+      Number(req.params.id),
+      Number(req.user.id),
+      req.body
+    );
+    if (!success) return res.status(404).json({ message: 'Book not found' });
+    res.status(201).send();
+  }
 }
 
 export const bookController = new BookController();

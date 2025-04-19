@@ -1,14 +1,21 @@
-import { BookRepository } from '../repositories/bookRepository';
-import { Book } from '../entities/book';
-import { IBookRepository } from 'repositories/interfaces/bookRepository.interface';
 import { DeleteResult } from 'typeorm';
+import { Book } from '../entities/book';
+import { BookRepository } from '../repositories/bookRepository';
 import { IBookService } from './interfaces/bookService.interface';
+import { IBookRepository } from '../repositories/interfaces/bookRepository.interface';
+import { IBookRatingRepository } from '../repositories/interfaces/bookRatingRepository.interface';
+import { BookRatingRepository } from '../repositories/bookRatingRepository';
 
 export class BookService implements IBookService {
   private bookRepository: IBookRepository;
+  private bookRatingRepository: IBookRatingRepository;
 
-  constructor(bookRepository: IBookRepository) {
+  constructor(
+    bookRepository: IBookRepository,
+    bookRatingRepository: IBookRatingRepository
+  ) {
     this.bookRepository = bookRepository;
+    this.bookRatingRepository = bookRatingRepository;
   }
 
   async getAllBooks(): Promise<Book[]> {
@@ -40,6 +47,18 @@ export class BookService implements IBookService {
 
     return (result.affected ?? 0) !== 0;
   }
+
+  async rateBook(bookId: number, userId: number, data: { rating: number }) {
+    if (!userId) throw new Error('User id not found');
+    // todo verifier si un rating pour l'utilisateur existe deja, si c'est le cas, update
+    const addedData = { ...data, book_id: bookId, user_id: userId };
+    const bookRating = this.bookRatingRepository.create(addedData);
+    return await this.bookRatingRepository.save(bookRating);
+  }
 }
 const bookRepository = new BookRepository();
-export const bookService: IBookService = new BookService(bookRepository);
+const bookRatingRepository = new BookRatingRepository();
+export const bookService: IBookService = new BookService(
+  bookRepository,
+  bookRatingRepository
+);

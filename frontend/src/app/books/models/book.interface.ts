@@ -6,4 +6,6 @@ export interface Book {
   cover?: string;
   published_date: string;
   last_modification_date: Date;
+  created_at: Date;
+  created_by: number;
 }

@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["node", "typeorm"],
+    "types": ["node", "typeorm", "./src/types/express"],
     "baseUrl": "./src"
   }
 }

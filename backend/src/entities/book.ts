@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
   Check,
 } from 'typeorm';
-import { User } from './user'; // Assuming User is in a separate file
+import { User } from './user';
 
 @Entity()
 export class Book {

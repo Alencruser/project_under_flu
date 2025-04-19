@@ -1,3 +1,4 @@
+import { BookRating } from 'entities/book-rating';
 import { Book } from '../../entities/book';
 
 export interface IBookService {
@@ -7,4 +8,9 @@ export interface IBookService {
   createBook(data: Partial<Book>): Promise<Book>;
   updateBook(id: number, data: Partial<Book>): Promise<Book | null>;
   deleteBook(id: number): Promise<boolean>;
+  rateBook(
+    bookId: number,
+    userId: number,
+    data: { rating: number }
+  ): Promise<BookRating>;
 }

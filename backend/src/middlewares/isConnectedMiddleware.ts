@@ -9,7 +9,9 @@ export const isConnectedMiddleware = (
   try {
     const token = req.header('Authorization');
     if (!token?.length) throw new Error('Authorization missing');
-    jwtService.verify(token);
+    const decoded = jwtService.verify(token);
+    const [username, id] = decoded.split('_');
+    req.user = { username, id };
     next();
   } catch (error: unknown) {
     res.status(401).json({

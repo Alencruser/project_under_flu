@@ -4,6 +4,7 @@ import { validateDtoMiddleware } from '../middlewares/validateDto';
 import { CreateBookDTO } from '../dtos/createBook.dto';
 import { asyncHandler } from '../utils/asyncHandler';
 import { isConnectedMiddleware } from '../middlewares/isConnectedMiddleware';
+import { RateBookDTO } from '../dtos/rateBook.dto';
 
 const router = Router();
 
@@ -21,6 +22,15 @@ router.post(
   asyncHandler(validateDtoMiddleware(CreateBookDTO)),
   (req, res, next) => {
     bookController.createBook(req, res).catch(next);
+  }
+);
+
+router.post(
+  '/:id/rating',
+  isConnectedMiddleware,
+  asyncHandler(validateDtoMiddleware(RateBookDTO)),
+  (req, res, next) => {
+    bookController.rateBook(req, res).catch(next);
   }
 );
 
