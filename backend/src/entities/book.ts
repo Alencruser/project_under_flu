@@ -1,14 +1,11 @@
 import 'reflect-metadata';
 import {
+  Column,
+  CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
   UpdateDateColumn,
-  Check,
 } from 'typeorm';
-import { User } from './user';
 
 @Entity()
 export class Book {
@@ -24,9 +21,6 @@ export class Book {
   @Column({ type: 'text', nullable: true })
   note?: number;
 
-  @Column({ type: 'integer', nullable: true })
-  rating?: number;
-
   @Column({ type: 'text', nullable: true })
   cover?: string;
 
@@ -36,7 +30,9 @@ export class Book {
   @UpdateDateColumn()
   last_modification_date!: Date;
 
-  @ManyToOne(() => User, (user) => user.id, { nullable: true })
-  @JoinColumn({ name: 'user_id' })
-  user?: User;
+  @CreateDateColumn()
+  created_at!: Date;
+
+  @Column()
+  created_by!: number;
 }

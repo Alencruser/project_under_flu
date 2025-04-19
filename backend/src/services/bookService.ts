@@ -30,8 +30,8 @@ export class BookService implements IBookService {
     return await this.bookRepository.findByTitle(title);
   }
 
-  async createBook(data: Partial<Book>): Promise<Book> {
-    const book = this.bookRepository.create(data);
+  async createBook(userId: number, data: Partial<Book>): Promise<Book> {
+    const book = this.bookRepository.create({ ...data, created_by: userId });
     return await this.bookRepository.save(book);
   }
 
