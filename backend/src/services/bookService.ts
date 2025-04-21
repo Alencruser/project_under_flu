@@ -50,7 +50,6 @@ export class BookService implements IBookService {
 
   async rateBook(bookId: number, userId: number, data: { rating: number }) {
     if (!userId) throw new Error('User id not found');
-    // todo verifier si un rating pour l'utilisateur existe deja, si c'est le cas, update
     const addedData = { ...data, book_id: bookId, user_id: userId };
     const bookRating = this.bookRatingRepository.create(addedData);
     return await this.bookRatingRepository.save(bookRating);
