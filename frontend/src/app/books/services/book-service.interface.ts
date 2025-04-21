@@ -7,4 +7,5 @@ export interface IBookService {
   createBook(book: Book): Observable<Book>;
   editBook(book: Book): Observable<Book>;
   removeBook(id: number): Observable<void>;
+  rateBook(id: number, rating: number): Observable<void>;
 }

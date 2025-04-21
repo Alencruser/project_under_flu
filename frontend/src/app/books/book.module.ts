@@ -12,6 +12,7 @@ import { BookFormComponent } from './components/book-form.component';
 import { BookListComponent } from './components/book-list.component';
 import { BookService } from './services/book.service';
 import { BookViewComponent } from './components/book-view.component';
+import { RatingWidgetModule } from '../rating-widget/rating-widget.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BookViewComponent } from './components/book-view.component';
     ReactiveFormsModule,
     BooksRoutingModule,
     NgbDatepickerModule,
+    RatingWidgetModule,
   ],
   providers: [BookService, provideHttpClient(withInterceptorsFromDi())],
 })

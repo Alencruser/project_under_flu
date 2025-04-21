@@ -8,4 +8,5 @@ export interface Book {
   last_modification_date: Date;
   created_at: Date;
   created_by: number;
+  rating?: number;
 }

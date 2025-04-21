@@ -38,4 +38,12 @@ export class BookApiService implements IBookApiService {
   deleteBook(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  rateBook(id: number, rating: number) {
+    return this.http.post<void>(`${this.apiUrl}/${id}/rating`, { rating });
+  }
+
+  removeRatingForBook(id: number) {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/rating`);
+  }
 }

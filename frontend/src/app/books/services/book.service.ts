@@ -56,4 +56,11 @@ export class BookService implements IBookService {
   removeBook(id: number): Observable<void> {
     return this.apiService.deleteBook(id);
   }
+
+  rateBook(id: number, rating: number) {
+    if (rating == -1) {
+      return this.apiService.removeRatingForBook(id);
+    }
+    return this.apiService.rateBook(id, rating);
+  }
 }

@@ -1,0 +1,19 @@
+.app-favorite-widget {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  svg {
+    height: 18px;
+    cursor: pointer;
+    fill: white;
+    stroke: black;
+    stroke-width: 3%;
+    overflow: visible;
+  }
+  svg:hover,
+  .yellow {
+    stroke: rgba(218, 179, 5, 0.808);
+    fill: rgba(218, 179, 5, 0.808);
+  }
+}

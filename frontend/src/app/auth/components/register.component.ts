@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit {
     };
     this.authService.register(user).subscribe({
       next: (s) => {
-        console.log(s);
         this.alertService.showAlert('success', 'Account created');
       },
       error: (err) => {

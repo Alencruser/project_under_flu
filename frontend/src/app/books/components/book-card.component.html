@@ -9,6 +9,12 @@
   <div class="book-title" title="{{ book.title }}">
     <h5>{{ book.title }}</h5>
   </div>
+  <div class="rating-book">
+    <app-rating-widget
+      (ratingValue)="rateThisBook($event)"
+      [initialValue]="book.rating"
+    ></app-rating-widget>
+  </div>
   <div class="book-actions">
     <button
       class="btn btn-outline-info"

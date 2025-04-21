@@ -58,4 +58,17 @@ export class BookCardComponent implements OnInit {
   viewBook() {
     this.router.navigate(['/view'], { state: { book: this.book } });
   }
+
+  rateThisBook(rating: number) {
+    const bookId = this.book.id;
+    this.bookService.rateBook(bookId, rating).subscribe({
+      next: () => {
+        this.alertService.showAlert('success', 'Rate updated successfully');
+      },
+      error: (err) => {
+        console.error('Failed to update the rate:', err.error.message);
+        this.alertService.showAlert('warning', 'Failed to update the rate');
+      },
+    });
+  }
 }
