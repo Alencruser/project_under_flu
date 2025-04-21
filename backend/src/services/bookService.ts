@@ -5,6 +5,8 @@ import { IBookService } from './interfaces/bookService.interface';
 import { IBookRepository } from '../repositories/interfaces/bookRepository.interface';
 import { IBookRatingRepository } from '../repositories/interfaces/bookRatingRepository.interface';
 import { BookRatingRepository } from '../repositories/bookRatingRepository';
+import { BookRating } from '../entities/book-rating';
+import { AppDataSource } from '../config/data-source';
 
 export class BookService implements IBookService {
   private bookRepository: IBookRepository;
@@ -18,8 +20,24 @@ export class BookService implements IBookService {
     this.bookRatingRepository = bookRatingRepository;
   }
 
-  async getAllBooks(): Promise<Book[]> {
-    return await this.bookRepository.find();
+  async getAllBooks(
+    userId: number
+  ): Promise<(Book & { myRating: number | null })[]> {
+    const bookMetadata = AppDataSource.getMetadata(Book);
+    const bookColumns = bookMetadata.columns.map((col) => col.propertyName);
+    const bookSelects = bookColumns.map((col) => `book.${col} AS ${col}`);
+    bookSelects.push('rating.rating AS rating');
+
+    return await this.bookRepository
+      .createQueryBuilder('book')
+      .leftJoin(
+        BookRating,
+        'rating',
+        'rating.book_id = book.id AND rating.user_id = :userId',
+        { userId }
+      )
+      .select(bookSelects)
+      .getRawMany();
   }
 
   async getBookById(id: number): Promise<Book | null> {
@@ -53,6 +71,15 @@ export class BookService implements IBookService {
     const addedData = { ...data, book_id: bookId, user_id: userId };
     const bookRating = this.bookRatingRepository.create(addedData);
     return await this.bookRatingRepository.save(bookRating);
+  }
+
+  async removeRatingBook(bookId: number, userId: number): Promise<boolean> {
+    if (!userId) throw new Error('User id not found');
+    const result: DeleteResult = await this.bookRatingRepository.delete({
+      user_id: userId,
+      book_id: bookId,
+    });
+    return (result.affected ?? 0) !== 0;
   }
 }
 const bookRepository = new BookRepository();

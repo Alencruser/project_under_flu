@@ -1,5 +1,6 @@
 import 'reflect-metadata';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Book } from './book';
 
 @Entity()
 export class BookRating {
@@ -11,4 +12,8 @@ export class BookRating {
 
   @Column()
   rating!: number;
+
+  @ManyToOne(() => Book, (book) => book.ratings)
+  @JoinColumn({ name: 'book_id' })
+  book!: Book;
 }

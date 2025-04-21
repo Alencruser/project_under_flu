@@ -1,3 +1,4 @@
+import { DeleteResult } from 'typeorm';
 import { AppDataSource } from '../config/data-source';
 import { BookRating } from '../entities/book-rating';
 import { IBookRatingRepository } from './interfaces/bookRatingRepository.interface';
@@ -11,5 +12,9 @@ export class BookRatingRepository implements IBookRatingRepository {
 
   async save(data: BookRating): Promise<BookRating> {
     return await this.repo.save(data);
+  }
+
+  async delete(data: Partial<BookRating>): Promise<DeleteResult> {
+    return await this.repo.delete(data);
   }
 }

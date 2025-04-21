@@ -4,11 +4,12 @@ import { bookService } from '../services/bookService'; // Import the instance
 class BookController {
   async getMultipleBooks(req: Request, res: Response) {
     const { title } = req.query;
+    const userId = req.user!.id;
     if (title) {
       const books = await bookService.getBooksByTitle(title as string);
       res.json(books);
     } else {
-      const books = await bookService.getAllBooks();
+      const books = await bookService.getAllBooks(Number(userId));
       res.json(books);
     }
   }
@@ -51,6 +52,17 @@ class BookController {
     );
     if (!bookRating) return res.status(404).json({ message: 'Book not found' });
     res.status(201).json(bookRating);
+  }
+
+  async removeRatingOnBook(req: Request, res: Response) {
+    if (!req.user?.id)
+      return res.status(401).json({ message: 'User not found' });
+    const success = await bookService.removeRatingBook(
+      Number(req.params.id),
+      Number(req.user.id)
+    );
+    if (!success) return res.status(404).json({ message: 'Rate not found' });
+    res.status(204).send();
   }
 }
 

@@ -34,6 +34,10 @@ router.post(
   }
 );
 
+router.delete('/:id/rating', isConnectedMiddleware, (req, res, next) => {
+  bookController.removeRatingOnBook(req, res).catch(next);
+});
+
 router.put(
   '/:id',
   isConnectedMiddleware,

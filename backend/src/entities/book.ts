@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { BookRating } from './book-rating';
 
 @Entity()
 export class Book {
@@ -35,4 +37,7 @@ export class Book {
 
   @Column()
   created_by!: number;
+
+  @OneToMany(() => BookRating, (rating) => rating.book_id)
+  ratings?: BookRating[];
 }

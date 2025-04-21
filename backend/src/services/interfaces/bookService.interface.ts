@@ -2,7 +2,7 @@ import { BookRating } from 'entities/book-rating';
 import { Book } from '../../entities/book';
 
 export interface IBookService {
-  getAllBooks(): Promise<Book[]>;
+  getAllBooks(userId: number): Promise<(Book & { myRating: number | null })[]>;
   getBookById(id: number): Promise<Book | null>;
   getBooksByTitle(title: string): Promise<Book[]>;
   createBook(userId: number, data: Partial<Book>): Promise<Book>;
@@ -13,4 +13,5 @@ export interface IBookService {
     userId: number,
     data: { rating: number }
   ): Promise<BookRating>;
+  removeRatingBook(bookId: number, userId: number): Promise<Boolean>;
 }

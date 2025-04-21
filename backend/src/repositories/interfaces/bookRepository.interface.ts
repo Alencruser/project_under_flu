@@ -8,4 +8,5 @@ export interface IBookRepository {
   create(data: Partial<Book>): Book;
   save(book: Book): Promise<Book>;
   delete(id: number): Promise<DeleteResult>;
+  createQueryBuilder(entity: string): any;
 }

@@ -1,6 +1,6 @@
 import { AppDataSource } from '../config/data-source';
 import { Book } from '../entities/book';
-import { DeleteResult, ILike } from 'typeorm';
+import { DeleteResult, ILike, SelectQueryBuilder } from 'typeorm';
 import { IBookRepository } from './interfaces/bookRepository.interface';
 
 export class BookRepository implements IBookRepository {
@@ -30,5 +30,9 @@ export class BookRepository implements IBookRepository {
 
   async delete(id: number): Promise<DeleteResult> {
     return await this.repo.delete(id);
+  }
+
+  createQueryBuilder(entity: string): SelectQueryBuilder<Book> {
+    return this.repo.createQueryBuilder(entity);
   }
 }
