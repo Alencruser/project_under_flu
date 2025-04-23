@@ -34,7 +34,7 @@ export class BookService implements IBookService {
     const bookSelects = bookColumns.map((col) => `book.${col} AS ${col}`);
     bookSelects.push('rating.rating AS rating');
     bookSelects.push(
-      'CASE WHEN toRead.book_id IS NOT NULL THEN true ELSE false END AS savedForLater'
+      'CASE WHEN toRead.book_id IS NOT NULL THEN true ELSE false END AS saved_for_later'
     );
 
     return await this.bookRepository
