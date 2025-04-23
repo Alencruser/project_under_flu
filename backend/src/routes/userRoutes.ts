@@ -4,6 +4,7 @@ import { CreateUserDTO } from '../dtos/createUser.dto';
 import { Router } from 'express';
 import { validateDtoMiddleware } from '../middlewares/validateDto';
 import { asyncHandler } from '../utils/asyncHandler';
+import { RefreshTokenDTO } from '../dtos/refreshToken.dto';
 
 const router = Router();
 
@@ -20,6 +21,14 @@ router.post(
   asyncHandler(validateDtoMiddleware(CreateUserDTO)),
   (req, res, next) => {
     userController.createUser(req, res).catch(next);
+  }
+);
+
+router.post(
+  '/refresh',
+  asyncHandler(validateDtoMiddleware(RefreshTokenDTO)),
+  (req, res, next) => {
+    userController.refreshToken(req, res).catch(next);
   }
 );
 

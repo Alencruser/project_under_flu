@@ -5,4 +5,6 @@ export interface IAuthApiService {
   connect(data: User): Observable<ConnectResponse>;
 
   register(data: User): Observable<ConnectResponse>;
+
+  refreshToken(token: string | null): Observable<{ token: string }>;
 }

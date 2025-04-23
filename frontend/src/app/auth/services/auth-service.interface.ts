@@ -15,4 +15,6 @@ export interface IAuthService {
   getUsername(): string | null;
 
   disconnect(): void;
+
+  refreshToken(): Observable<{ token: string }>;
 }

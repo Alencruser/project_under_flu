@@ -18,4 +18,10 @@ export class AuthApiService implements IAuthApiService {
   register(data: User) {
     return this.http.post<ConnectResponse>(`${this.apiUrl}/register`, data);
   }
+
+  refreshToken(token: string | null) {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/refresh`, {
+      token,
+    });
+  }
 }

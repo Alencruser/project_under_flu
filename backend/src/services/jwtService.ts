@@ -21,6 +21,15 @@ export class JWTService implements IJWTService {
       throw err;
     }
   }
+
+  refreshToken(tokenReceived: string): string {
+    try {
+      const token = Jwt.verify(tokenReceived, this.secretPass);
+      return this.sign((token as { user: string }).user);
+    } catch (err: unknown) {
+      throw err;
+    }
+  }
 }
 
 export const jwtService = new JWTService(process.env.JWT_SECRET!);
