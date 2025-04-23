@@ -1,5 +1,6 @@
 import { BookRating } from 'entities/book-rating';
 import { Book } from '../../entities/book';
+import { BookToRead } from '../../entities/book-to-read';
 
 export interface IBookService {
   getAllBooks(userId: number): Promise<(Book & { myRating: number | null })[]>;
@@ -14,4 +15,6 @@ export interface IBookService {
     data: { rating: number }
   ): Promise<BookRating>;
   removeRatingBook(bookId: number, userId: number): Promise<Boolean>;
+  savedForLater(bookId: number, userId: number): Promise<BookToRead>;
+  removeSavedBook(bookId: number, userId: number): Promise<Boolean>;
 }

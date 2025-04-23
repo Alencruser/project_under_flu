@@ -25,6 +25,19 @@ router.post(
   }
 );
 
+router.put(
+  '/:id',
+  isConnectedMiddleware,
+  asyncHandler(validateDtoMiddleware(CreateBookDTO)),
+  (req, res, next) => {
+    bookController.updateBook(req, res).catch(next);
+  }
+);
+
+router.delete('/:id', isConnectedMiddleware, (req, res, next) => {
+  bookController.deleteBook(req, res).catch(next);
+});
+
 router.post(
   '/:id/rating',
   isConnectedMiddleware,
@@ -38,17 +51,12 @@ router.delete('/:id/rating', isConnectedMiddleware, (req, res, next) => {
   bookController.removeRatingOnBook(req, res).catch(next);
 });
 
-router.put(
-  '/:id',
-  isConnectedMiddleware,
-  asyncHandler(validateDtoMiddleware(CreateBookDTO)),
-  (req, res, next) => {
-    bookController.updateBook(req, res).catch(next);
-  }
-);
+router.post('/:id/save', isConnectedMiddleware, (req, res, next) => {
+  bookController.saveForLater(req, res).catch(next);
+});
 
-router.delete('/:id', isConnectedMiddleware, (req, res, next) => {
-  bookController.deleteBook(req, res).catch(next);
+router.delete('/:id/save', isConnectedMiddleware, (req, res, next) => {
+  bookController.removeSavedBook(req, res).catch(next);
 });
 
 export default router;

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { Book } from '../entities/book';
 import { User } from '../entities/user';
 import { BookRating } from '../entities/book-rating';
+import { BookToRead } from '../entities/book-to-read';
 
 dotenv.config();
 
@@ -14,6 +15,6 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [User, Book, BookRating],
+  entities: [User, Book, BookRating, BookToRead],
   synchronize: true,
 });

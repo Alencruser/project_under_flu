@@ -64,6 +64,29 @@ class BookController {
     if (!success) return res.status(404).json({ message: 'Rate not found' });
     res.status(204).send();
   }
+
+  async saveForLater(req: Request, res: Response) {
+    if (!req.user?.id)
+      return res.status(401).json({ message: 'User not found' });
+    const bookSaved = await bookService.savedForLater(
+      Number(req.params.id),
+      Number(req.user.id)
+    );
+    if (!bookSaved) return res.status(404).json({ message: 'Book not found' });
+    res.status(201).json(bookSaved);
+  }
+
+  async removeSavedBook(req: Request, res: Response) {
+    if (!req.user?.id)
+      return res.status(401).json({ message: 'User not found' });
+    const success = await bookService.removeSavedBook(
+      Number(req.params.id),
+      Number(req.user.id)
+    );
+    if (!success)
+      return res.status(404).json({ message: 'Book saved not found' });
+    res.status(204).send();
+  }
 }
 
 export const bookController = new BookController();

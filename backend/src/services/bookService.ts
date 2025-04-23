@@ -7,17 +7,23 @@ import { IBookRatingRepository } from '../repositories/interfaces/bookRatingRepo
 import { BookRatingRepository } from '../repositories/bookRatingRepository';
 import { BookRating } from '../entities/book-rating';
 import { AppDataSource } from '../config/data-source';
+import { IBookToReadRepository } from '../repositories/interfaces/bookToRead.interface';
+import { BookToReadRepository } from '../repositories/bookToReadRepository';
+import { BookToRead } from '../entities/book-to-read';
 
 export class BookService implements IBookService {
   private bookRepository: IBookRepository;
   private bookRatingRepository: IBookRatingRepository;
+  private bookToReadRepository: IBookToReadRepository;
 
   constructor(
     bookRepository: IBookRepository,
-    bookRatingRepository: IBookRatingRepository
+    bookRatingRepository: IBookRatingRepository,
+    bookToReadRepository: IBookToReadRepository
   ) {
     this.bookRepository = bookRepository;
     this.bookRatingRepository = bookRatingRepository;
+    this.bookToReadRepository = bookToReadRepository;
   }
 
   async getAllBooks(
@@ -27,6 +33,9 @@ export class BookService implements IBookService {
     const bookColumns = bookMetadata.columns.map((col) => col.propertyName);
     const bookSelects = bookColumns.map((col) => `book.${col} AS ${col}`);
     bookSelects.push('rating.rating AS rating');
+    bookSelects.push(
+      'CASE WHEN toRead.book_id IS NOT NULL THEN true ELSE false END AS savedForLater'
+    );
 
     return await this.bookRepository
       .createQueryBuilder('book')
@@ -34,6 +43,12 @@ export class BookService implements IBookService {
         BookRating,
         'rating',
         'rating.book_id = book.id AND rating.user_id = :userId',
+        { userId }
+      )
+      .leftJoin(
+        BookToRead,
+        'toRead',
+        'toRead.book_id = book.id AND toRead.user_id = :userId',
         { userId }
       )
       .select(bookSelects)
@@ -67,15 +82,27 @@ export class BookService implements IBookService {
   }
 
   async rateBook(bookId: number, userId: number, data: { rating: number }) {
-    if (!userId) throw new Error('User id not found');
     const addedData = { ...data, book_id: bookId, user_id: userId };
     const bookRating = this.bookRatingRepository.create(addedData);
     return await this.bookRatingRepository.save(bookRating);
   }
 
   async removeRatingBook(bookId: number, userId: number): Promise<boolean> {
-    if (!userId) throw new Error('User id not found');
     const result: DeleteResult = await this.bookRatingRepository.delete({
+      user_id: userId,
+      book_id: bookId,
+    });
+    return (result.affected ?? 0) !== 0;
+  }
+
+  async savedForLater(bookId: number, userId: number) {
+    const addedData = { book_id: bookId, user_id: userId };
+    const bookRating = this.bookToReadRepository.create(addedData);
+    return await this.bookToReadRepository.save(bookRating);
+  }
+
+  async removeSavedBook(bookId: number, userId: number): Promise<Boolean> {
+    const result: DeleteResult = await this.bookToReadRepository.delete({
       user_id: userId,
       book_id: bookId,
     });
@@ -84,7 +111,9 @@ export class BookService implements IBookService {
 }
 const bookRepository = new BookRepository();
 const bookRatingRepository = new BookRatingRepository();
+const bookToReadRepository = new BookToReadRepository();
 export const bookService: IBookService = new BookService(
   bookRepository,
-  bookRatingRepository
+  bookRatingRepository,
+  bookToReadRepository
 );
