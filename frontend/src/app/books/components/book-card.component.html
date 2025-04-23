@@ -23,6 +23,10 @@
     >
       <i class="fa-solid fa-eye"></i>
     </button>
+    <app-for-later-widget
+      (toSave)="saveForLater($event)"
+      [initialValue]="book.savedForLater"
+    ></app-for-later-widget>
     <button
       class="btn btn-outline-info"
       (click)="editBook(book.id)"

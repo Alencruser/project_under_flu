@@ -9,4 +9,5 @@ export interface Book {
   created_at: Date;
   created_by: number;
   rating?: number;
+  savedForLater?: boolean;
 }

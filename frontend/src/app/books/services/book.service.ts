@@ -63,4 +63,11 @@ export class BookService implements IBookService {
     }
     return this.apiService.rateBook(id, rating);
   }
+
+  saveForLater(id: number, toSave: boolean) {
+    if (!toSave) {
+      return this.apiService.removeSavedBook(id);
+    }
+    return this.apiService.saveForLater(id);
+  }
 }

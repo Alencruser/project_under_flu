@@ -71,4 +71,23 @@ export class BookCardComponent implements OnInit {
       },
     });
   }
+
+  saveForLater(toSave: boolean) {
+    const bookId = this.book.id;
+    this.bookService.saveForLater(bookId, toSave).subscribe({
+      next: () => {
+        this.alertService.showAlert(
+          'success',
+          toSave ? 'Book saved for later' : 'Book removed from saved'
+        );
+      },
+      error: (err) => {
+        console.error('Failed to save the book:', err.error.message);
+        this.alertService.showAlert(
+          'warning',
+          'Failed to save the book for later'
+        );
+      },
+    });
+  }
 }

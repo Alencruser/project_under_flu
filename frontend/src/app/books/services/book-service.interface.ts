@@ -8,4 +8,5 @@ export interface IBookService {
   editBook(book: Book): Observable<Book>;
   removeBook(id: number): Observable<void>;
   rateBook(id: number, rating: number): Observable<void>;
+  saveForLater(id: number, toSave: boolean): Observable<void>;
 }

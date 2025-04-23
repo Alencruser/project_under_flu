@@ -46,4 +46,12 @@ export class BookApiService implements IBookApiService {
   removeRatingForBook(id: number) {
     return this.http.delete<void>(`${this.apiUrl}/${id}/rating`);
   }
+
+  saveForLater(id: number) {
+    return this.http.post<void>(`${this.apiUrl}/${id}/save`, {});
+  }
+
+  removeSavedBook(id: number) {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/save`);
+  }
 }

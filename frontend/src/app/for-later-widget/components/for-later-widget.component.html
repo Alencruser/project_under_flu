@@ -1,0 +1,10 @@
+<div class="for-later-widget">
+  <button
+    class="btn btn-outline-info"
+    (click)="saveForLater()"
+    title="Save For Later"
+    [ngClass]="{ saved: !!initialValue }"
+  >
+    <i class="fa-solid fa-clock"></i>
+  </button>
+</div>

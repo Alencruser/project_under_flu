@@ -13,6 +13,7 @@ import { BookListComponent } from './components/book-list.component';
 import { BookService } from './services/book.service';
 import { BookViewComponent } from './components/book-view.component';
 import { RatingWidgetModule } from '../rating-widget/rating-widget.module';
+import { ForLaterWidgetModule } from '../for-later-widget/for-later-widget.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RatingWidgetModule } from '../rating-widget/rating-widget.module';
     BooksRoutingModule,
     NgbDatepickerModule,
     RatingWidgetModule,
+    ForLaterWidgetModule,
   ],
   providers: [BookService, provideHttpClient(withInterceptorsFromDi())],
 })

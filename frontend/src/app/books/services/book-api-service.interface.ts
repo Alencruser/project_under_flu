@@ -9,4 +9,6 @@ export interface IBookApiService {
   deleteBook(id: number): Observable<void>;
   rateBook(id: number, rating: number): Observable<void>;
   removeRatingForBook(id: number): Observable<void>;
+  saveForLater(id: number): Observable<void>;
+  removeSavedBook(id: number): Observable<void>;
 }
