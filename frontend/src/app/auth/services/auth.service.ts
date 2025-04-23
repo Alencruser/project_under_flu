@@ -63,7 +63,6 @@ export class AuthService implements IAuthService {
   }
 
   refreshToken() {
-    console.log(this.getToken());
     return this.authApiService.refreshToken(this.getToken()).pipe(
       tap((response) => {
         const token = response.token;

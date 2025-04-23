@@ -15,7 +15,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {}
 
   toggleMenu() {
-    console.log('triggered menu');
     this.isMenuOpen = !this.isMenuOpen;
   }
 
