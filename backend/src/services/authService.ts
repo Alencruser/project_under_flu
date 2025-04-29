@@ -15,6 +15,7 @@ export class AuthService implements IAuthService {
 
   async register(data: User) {
     data.password = cryptService.hashPassword(data.password);
+    data.username = data.username.toLowerCase();
     const user = this.userRepository.create(data);
     const savedUser = await this.userRepository.save(user);
     const token = jwtService.sign(`${savedUser.username}_${savedUser.id}`);
@@ -23,7 +24,7 @@ export class AuthService implements IAuthService {
 
   async connect(data: User): Promise<User & { jwt: string }> {
     const savedUser = await this.userRepository.findOneBy({
-      username: data.username,
+      username: data.username.toLowerCase(),
     });
     if (!savedUser) throw new InvalidCredentialsError();
     if (cryptService.checkPasswordMatch(data.password, savedUser!.password)) {
