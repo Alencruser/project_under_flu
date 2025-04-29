@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { debounceTime, Subject } from 'rxjs';
 import { Book } from '../models/book.interface';
 import { BookService } from '../services/book.service';
+import { BookFilterFields } from '../models/book-filters';
 
 @Component({
   selector: 'app-book-list',
@@ -13,6 +14,7 @@ import { BookService } from '../services/book.service';
 export class BookListComponent implements OnInit {
   books: Book[] = [];
   searchTitle: string = '';
+  filterFields = BookFilterFields;
 
   private searchSubject = new Subject<string>();
 
@@ -65,5 +67,9 @@ export class BookListComponent implements OnInit {
 
   navigateToAddBook() {
     this.router.navigate(['/add']);
+  }
+
+  getFilterFields() {
+    return this.filterFields;
   }
 }
